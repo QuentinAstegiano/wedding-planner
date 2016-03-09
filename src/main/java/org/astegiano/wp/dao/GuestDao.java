@@ -2,7 +2,6 @@ package org.astegiano.wp.dao;
 
 import com.google.common.base.Optional;
 import org.astegiano.wp.data.Guest;
-import org.astegiano.wp.mock.MockDatas;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,20 +11,26 @@ import java.util.stream.Collectors;
  */
 public class GuestDao {
 
-    private List<Guest> getAll() {
-        return MockDatas.getGuests();
+    private final GuestProvider provider;
+
+    public GuestDao(GuestProvider provider) {
+        this.provider = provider;
     }
 
     public List<Guest> getAllGuests(Optional<String> filter) {
         if (filter.isPresent()) {
             final String f = filter.get().toLowerCase();
-            return getAll().stream()
+            return provider.getGuests().stream()
                         .filter(g ->
                                     g.getFirstName().toLowerCase().contains(f) ||
                                     g.getLastName().toLowerCase().contains(f))
                         .collect(Collectors.toList());
         } else {
-            return getAll();
+            return provider.getGuests();
         }
+    }
+
+    public interface GuestProvider {
+        List<Guest> getGuests();
     }
 }

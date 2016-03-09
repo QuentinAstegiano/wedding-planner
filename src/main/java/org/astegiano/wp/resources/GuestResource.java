@@ -30,4 +30,5 @@ public class GuestResource {
     public List<Guest> getAll(@QueryParam("search") Optional<String> search) {
         return dao.getAllGuests(search);
     }
+
 }
