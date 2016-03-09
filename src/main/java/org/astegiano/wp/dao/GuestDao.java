@@ -2,7 +2,7 @@ package org.astegiano.wp.dao;
 
 import com.google.common.base.Optional;
 import org.astegiano.wp.data.Guest;
-import org.astegiano.wp.mock.MockGuests;
+import org.astegiano.wp.mock.MockDatas;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class GuestDao {
 
     private List<Guest> getAll() {
-        return MockGuests.get();
+        return MockDatas.getGuests();
     }
 
     public List<Guest> getAllGuests(Optional<String> filter) {
